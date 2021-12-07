@@ -18,7 +18,7 @@ def run():
         # OWID Climate Change impacts
         # Creative Commons BY license
         url = 'https://raw.githubusercontent.com/owid/owid-datasets/master/datasets/Climate%20change%20impacts/Climate%20change%20impacts.csv'
-        return get_data(url).query("Entity == 'World' and Year <=2021")
+        return get_data(url).query("Entity == 'World' and Year <=3000")
 
 
     st.set_page_config(layout = "wide")
@@ -33,9 +33,7 @@ def run():
     from the drop down menu in the other one.__
 
     __Scroll down to see charts demonstrating the correlation between 
-    the level of CO2 and global warming.__
-
-    __Hover over any of the charts to see more detail__
+    the level of CO2 and global warming. Hover your mouse pointer over any of the charts to see more detail__
 
     ---
 
@@ -43,8 +41,11 @@ def run():
 
     col2, space2, col3 = st.columns((10,1,10))
 
+    max_year = int(df_co2['year'].max())
+    min_year = int(df_co2['year'].min())
+
     with col2:
-        year = st.slider('Select year',1750,2020)
+        year = st.slider('Select year',min_year,max_year)
         fig = px.choropleth(df_co2[df_co2['year']==year], locations="iso_code",
                             color="co2_per_capita",
                             hover_name="country",
@@ -69,14 +70,15 @@ def run():
     st.markdown('---')
 
     col4, space3, col5,space4,col6 = st.columns((10,1,10,1,10))
+    start_year = 1850 # temperatures start at 1850
     with col4:
-        st.markdown("""
+        st.markdown(f"""
         ## Correlation between CO2 emission and global warming
 
         This can be seen in the adjacent graphs. 
         
         The first show temperature
-        has changed since 1850 and you can see that temperatures begin 
+        has changed since {start_year} and you can see that temperatures begin 
         to rise after the beginning of the twentieth century but there 
         is a sharp upturn in that rise about mid-way through (the scatter
         points are the actual figures for each year and the line is a 
@@ -94,7 +96,7 @@ def run():
         st.plotly_chart(fig3, use_container_width=True)
     with col6:
         st.subheader("Total world CO2 emissions")
-        fig4 = px.line(df3.query("country == 'World' and year >= 1850"),"year","co2")
+        fig4 = px.line(df3.query("country == 'World' and year >= @start_year"),"year","co2")
         st.plotly_chart(fig4, use_container_width=True)
 
 
