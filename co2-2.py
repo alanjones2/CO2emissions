@@ -89,7 +89,7 @@ def run():
         same period and a similar trend can be seen with a sharp rise in 
         emissions mid-twentieth century.
 
-        __Unfortunately the data on which these graphs rely have been deleted from the OWID repository, so this part of the app no longer works__
+        __**Unfortunately the data on which these graphs rely have been deleted from the OWID repository, so this part of the app no longer works**__
         """)
     #with col5:
     #    df4 = get_warming_data()
