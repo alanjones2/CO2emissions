@@ -88,16 +88,18 @@ def run():
         The second graph shows the rise in total CO2 emissions over the 
         same period and a similar trend can be seen with a sharp rise in 
         emissions mid-twentieth century.
+
+        __Unfortunately the data on which these graphs rely have been deleted from the OWID repository, so this part of the app no longer works__
         """)
-    with col5:
-        df4 = get_warming_data()
-        st.subheader("World sea temperature change ")
-        fig3 = px.scatter(df4,"Year","annual_sea_surface_temperature_anomaly", trendline='lowess')
-        st.plotly_chart(fig3, use_container_width=True)
-    with col6:
-        st.subheader("Total world CO2 emissions")
-        fig4 = px.line(df3.query("country == 'World' and year >= @start_year"),"year","co2")
-        st.plotly_chart(fig4, use_container_width=True)
+    #with col5:
+    #    df4 = get_warming_data()
+    #    st.subheader("World sea temperature change ")
+    #    fig3 = px.scatter(df4,"Year","annual_sea_surface_temperature_anomaly", trendline='lowess')
+    #    st.plotly_chart(fig3, use_container_width=True)
+    #with col6:
+    #    st.subheader("Total world CO2 emissions")
+    #    fig4 = px.line(df3.query("country == 'World' and year >= @start_year"),"year","co2")
+     #   st.plotly_chart(fig4, use_container_width=True)
 
 
     st.markdown('__Data Source:__ _Our World in Data CC BY_')
