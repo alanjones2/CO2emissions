@@ -13,12 +13,12 @@ def run():
         # Creative Commons BY license
         url = 'https://github.com/owid/co2-data/raw/master/owid-co2-data.csv'
         return get_data(url)
-    @st.cache
-    def get_warming_data():
-        # OWID Climate Change impacts
-        # Creative Commons BY license
-        url = 'https://raw.githubusercontent.com/owid/owid-datasets/master/datasets/Climate%20change%20impacts/Climate%20change%20impacts.csv'
-        return get_data(url).query("Entity == 'World' and Year <=3000")
+    #@st.cache
+    #def get_warming_data():
+    #    # OWID Climate Change impacts
+    #    # Creative Commons BY license
+    #    url = 'https://raw.githubusercontent.com/owid/owid-datasets/master/datasets/Climate%20change%20impacts/Climate%20change%20impacts.csv'
+    #    return get_data(url).query("Entity == 'World' and Year <=3000")
 
 
     st.set_page_config(layout = "wide")
@@ -54,8 +54,11 @@ def run():
         st.plotly_chart(fig, use_container_width=True)
 
     with col3: 
-        default_countries = ['World','United States','United Kingdom','EU-27','China', 'Australia']
+        default_countries = ['World','United States','United Kingdom','European Union (27)','China', 'Australia']
         countries = df_co2['country'].unique()
+
+        #countries
+        #default_countries
 
         selected_countries = st.multiselect('Select country or group',countries,default_countries)
 
